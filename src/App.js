@@ -154,12 +154,12 @@ function App() {
       }
     ); // There the mainBlock returns as a JSX element array or variable array because an array is return through the map().
 
-  const inputChangeHandle = (event, data) => {
-    // As this inputChangeHandle function is not executed, it is not a problem in here.
-    event.preventDefault();
-    console.log(data);
-    setInputVal(event.target.value); // At refreshing moment, State is not changed because this is inside of the setInputVal function. That is the reason why large number of line which is this line came first in the console output.
-  };
+  // const inputChangeHandle = (event, data) => {
+  //   // As this inputChangeHandle function is not executed, it is not a problem in here.
+  //   event.preventDefault();
+  //   console.log(data);
+  //   setInputVal(event.target.value); // At refreshing moment, State is not changed because this is inside of the setInputVal function. That is the reason why large number of line which is this line came first in the console output.
+  // };
 
   return (
     <div className="main__container">
