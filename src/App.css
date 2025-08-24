@@ -65,12 +65,76 @@
   justify-content: space-between;
 } */
 
+.header__container {
+  /* Properties */
+  width: 100vw /*%*/;
+  /* overflow-x: hidden; */
+  padding: 20px;
+  margin-bottom: 100px;
+  background-color: rgb(255, 238, 238);
+  position: /*fixed*/ sticky; /* sticky is not worked in some browsers. */
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__container nav {
+  position: relative;
+  /* overflow: hidden; */
+}
+
+.header__container nav ul {
+  overflow: hidden;
+  position: absolute;
+  top: /*0*/ /*-22px*/ -22px;
+  right: /*0*/ /*-22px*/ -20px;
+  padding: 20px /*50px 50px*/; /* top right bottom left */
+  height: 100vh; /* vh = view height */
+  background-color: rgb(255, 154, 154);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  transition: all 400ms ease-in;
+}
+
+.header__container .header__menuClose {
+  cursor: pointer; /* Change the arrow cursor to a hand cursor. Clickable behaviour to the close icon. */
+}
+
+.header__container .header__menu {
+  margin: 50px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+.header__container nav ol {
+  display: none; /* It does not see in normal situation. */
+}
+
+.header__container nav ul li {
+  cursor: pointer; /* Change the arrow cursor to a hand cursor. Clickable behaviour to the li content. */
+  font-weight: 700;
+  transition: all 400ms ease-in; /* Decides the way how animation look like. */
+}
+
+.header__container nav ul li:hover {
+  /* hover is an effect. */
+  color: red;
+}
+
 .main__container {
   margin: 0 auto; /* This center the element to the middle. This says that top and bottom are 0 and left and right are auto. Then it normally center the element to the middle.*/
   width: 90%;
   display: grid;
   grid-template-columns: /*repeat(2, 1fr)*/ 40% 60%; /* 40% for left side and 60% for right side */
   grid-template-rows: 1;
+  overflow-x: hidden;
 }
 
 .main__container .main_left {
@@ -108,4 +172,29 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+/* It is necessary to apply media queries at the bottom. This is to change the navbar between desktop and mobile states.*/
+@media only screen and (min-width: 768px) {
+  .header__container nav ul,
+  .header__container nav .header__menuClick {
+    display: none;
+  }
+
+  .header__container nav ol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .header__container nav ol li {
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 400ms ease-in;
+  }
+
+  .header__container nav ol li:hover {
+    color: red;
+  }
 }
