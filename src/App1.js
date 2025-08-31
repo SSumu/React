@@ -2,7 +2,7 @@
 
 import "./App.css";
 
-import { /*Fragment,*/ useState } from "react";
+import { /*Fragment,*/ useEffect, useState } from "react";
 import Unit from "./Components/Unit";
 import Header from "./Components/Header";
 
@@ -40,6 +40,86 @@ const App1 = () => {
   const [myData, setMyData] = useState([]); // This is to make the details (which is given from above useStates) in object form and save it as the array in useState(). The values was given by the user that is put in to this array inside the useState([]).
 
   // console.log(myData); // To check the value changing of myData. console.log() the data when the component is refreshed.
+
+  // useEffect(() => {
+  //   // We can write anything we like like activation of a function or any other thing, fetch or data fetching, api call.
+  //   console.log("use effect calling..");
+  // }); // First parameter is the effect callback function or the effect. useEffect(()=>{}) is the basic architecture of the useEffect().
+  // 1 st Theory
+  // When the data are typed in text boxes, the useState() is executed. Execution of useState() means that component is rerendered. The callback function inside the useEffect() is executed every time the component is rerendered when the useEffect() is written in basic structure.
+
+  // 1st part of useEffect()
+  // Other Structure of useEffect()
+  // useEffect(()=>{},[])
+  // In this occasion, empty array [] is given after the callback function.
+
+  // useEffect(() => {
+  //   console.log("use effect calling..");
+  // }, [/*inputData*/ inputData.name, inputData.position]);
+
+  // This empty array is a rendering object array or a variable array. According to the variables in this array which it decides that useEffect() should be run(executed) or not. useEffect() runs when the variables are changed.
+  // 2nd Theory
+  // After the [] are used, useEffect() is executed when the component renders only at the very first time.
+  // In here, If there is a change happens in the data in the variables in this variable array or object array, this useEffect() is fired.
+  // When the inputData are changed, useEffect() is run. The real meaning is that if there is a inputData are changed, useEffect() must be run.
+  // When there is a state change in the variable, useEffect() is run.
+  // Only when there is a change in a variable or a object or a state, callback function in the useEffect() is executed. This is the specialty of the useEffect().
+
+  // 2nd part of useEffect()
+
+  const [windowWidth, setWindowWidth] = useState(
+    window.innerWidth
+  ); /*changeWindowWidth*/ // This useState() is needed for this useEffect(). This is to measure window width. Number output will be come. // ); // Listener is written inside double quotes. resize is the event. resize event is to check whether there is a change.
+
+  // Clean Up process
+  // useEffect() has another part inside of it which is cleanup process.
+  // useEffect(() => {
+  // console.log("use effect calling..");
+  // const changeWindowWidth = () => {
+  //   setWindowWidth(window.innerWidth);
+  // };
+
+  // In this way same addEventListener is executed so many rounds. addEventListener is added in that each round(Accordng to the rounds of executed.).
+  // window.addEventListener(
+  //   "resize",
+  /*() => {
+      setWindowWidth(window.innerWidth);
+    }*/ // This addEventListener were added again and again and many rounds. This is not so good.
+
+  // There is no difference between these two methods.
+  // When the effect is running, window.addEventListener("resize", changeWindowWidth); is fired once. Then the Event Listener is added once. With that, every time this changes, the useEffect() fires up every time the state changes. This happens in the basic structure of the useEffect(without the []).
+
+  //   console.log("use effect calling...");
+  // }, [inputData.name]); // Definitely there must be something like inputData.name to fire up the effect unless there is no use of executing the effect once. According to the new data inside of it, fire up the data or send the data, if it is a fetching data, to send the data we definitely have to expect state change or otherwise we have to expect a url change. At such a time, if a state changes, the useEffect will definitely be triggered every time that state changes. So, the eventListener will definitely run every time like this. That is the thing which practically happens. Practically it is really difficult to give a useEffect to runs only once. There are very few occasions which can give to run useEffect only once. At all other times definitely we have to give to fire the useEffect when there is a state change or a url change.
+
+  // Sometimes when the data comes, in here we consider this executes only once(But according to amila it is not executed once). But when the api call comes, useEffect must be executed and it must be executed when the function fires up. It is necessary to execute the useEffect and then a api call must be sent according to the new data by the time it is necessary to run api call or fire up a function when a state or a url is changed when a state or a url is changed. So several listens must be there.
+
+  // Clean up process of the useEffect is used for remove the executing of Event Listeners repeatedly. In this we can, if the thing you want the use effect to execute for the second time is already executed, clear it first. The new one is executed after the old same one was cleared.
+
+  useEffect(() => {
+    // console.log("use effect calling..");
+    const changeWindowWidth = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // addEventListener is adding a new event.
+    window.addEventListener("resize", changeWindowWidth);
+    console.log("use effect calling...");
+
+    // This is the clean up process
+    // Clean up process is written as a function.
+    return () => {
+      console.log("use effect cleanup function running..");
+
+      // The thing what cleanup function must do.
+      // There is a window in event listener. This is to remove that event listener.
+      // Clean up the changeWindowWidth in resize.
+      window.removeEventListener("resize", changeWindowWidth);
+
+      // The cleanup process is executed first when useEffect is going to be run. After the cleanup process has executed that things inside in the useEffect() is executed.
+    };
+  }, [inputData.name]);
+
   return (
     // <Fragment>
     <div
@@ -49,6 +129,7 @@ const App1 = () => {
     >
       <Header />
       <div className="main__container">
+        <h1>{windowWidth}</h1>
         <div className="main_left">
           <input
             type="text"
