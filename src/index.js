@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client"; // Document of the React is created in 
 import "./index.css"; // css file related to this file.
 // import /*Sadeepal*/ App from "./App"; // Import the App.js. In export default, we can use any name to import the component.
 // import App1 from "./App1";
-import App2 from "./App2";
+// import App2 from "./App2";
+import App3 from "./App3";
 
 const root = ReactDOM.createRoot(document.getElementById("app")); // The meaning of document.getElementById("root") is that target the element of id named root in the document. So what happens in here is that ReactDOM pushes the React components which were created in React that to the element which id named root.
 // ReactDOM pushes the things(web site or web app) which were created from React that to the HTML document.
@@ -12,7 +13,8 @@ root.render(
     {/* <App /> */}
     {/* <Sadeepal /> */}
     {/* <App1 /> */}
-    <App2 />
+    {/* <App2 /> */}
+    <App3 />
   </React.StrictMode>
 );
 
